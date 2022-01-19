@@ -1,7 +1,11 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Button, View } from 'react-native'
 
 function HomeScreen({navigation}){
+    useEffect(()=>{
+        navigation.setOptions({title:'히히'});
+    },[navigation])
+    
     return(
         <View>
             <Button title="detal1열기"
