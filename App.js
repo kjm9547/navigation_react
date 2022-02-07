@@ -1,24 +1,35 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native'
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from './screens/Homescreen';
-import DetailScreen from './screens/DetailsScreen';
-const Stack = createNativeStackNavigator();
-
+import React from "react";
+import {NavigationContainer} from '@react-navigation/native'
+import {createDrawerNavigator} from '@react-navigation/drawer'
+import {View, Text, Button} from 'react-native'
+const Drawer = createDrawerNavigator();
+function HomeScreen({navigation}){
+  return(
+    <View>
+      <Text>Home</Text>
+      <Button title="Drawer 열기" onPress={()=>navigation.openDrawer()}/>
+      <Button title="Setting 열기" onPress={()=> navigation.navigate('Setting')}/>
+    </View>
+  )
+  }
+function SettingScreen({navigation}){
+  return(
+    <View>
+      <Text>Setting</Text>
+      <Button title="뒤로가기" onPress={()=>navigation.goBack()}/>
+    </View>
+  )
+}
 function App(){
   return(
     <NavigationContainer>
-      <Stack.Navigator initiolRoutename="Home">
-        <Stack.Screen name="Home" component={HomeScreen}
-                      options={{title:'홈',
-                    headerStyle:{backgroundColor:'red'}}}
-                      ></Stack.Screen>
-        <Stack.Screen name="detail" component={DetailScreen}
-                      ></Stack.Screen>
+      <Drawer.Navigator initialRouteName="Home" draerPosition="left" backBehavior="history">
+        <Drawer.Screen name="Home" component={HomeScreen}/>
+        <Drawer.Screen name="Setting" component={SettingScreen}/>
         
-      </Stack.Navigator>
+      </Drawer.Navigator>
     </NavigationContainer>
   )
-}
+};
 
-export default App; 
+export default App
